@@ -36,8 +36,6 @@ class Tree
         #construct left subtree recursively and make it the left child of original root 
         root_node.left = build_tree(array[0...middle])
         root_node.right = build_tree(array[(middle+1)..-1])
-        p root_node.data
-        p root_node
         root_node 
         #why does it not work with @ but it works without 
         
@@ -49,13 +47,55 @@ class Tree
         puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
         pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
     end
+
+    def insert(value)
+        if @sorted_array.include?(value)
+            puts "Value #{value} already in array"
+        else 
+        insert_rec(@root, value)
+        end 
+    end 
     
-    def insert 
+    def insert_rec(root, value)
+
+        if root == nil 
+            root = Node.new(value) 
+            root 
+        else 
+            if value > root.data
+                root.right = insert_rec(root.right, value) 
+                root 
+            elsif value < root.data 
+                root.left = insert_rec(root.left, value)
+                root 
+            end 
+        end 
 
     end 
 
+    def delete_node(root, value)
 
-    def delete 
+        if root = nil
+            return root 
+        elsif value < root.value 
+            # go left
+            root.left = delete_node(root.left, value)
+        elsif value > root.value
+            # go right 
+            root.right = delete_node(root.right, value)
+        else #root == value, delete
+            #node with only right child or no child 
+            if node.left == nil 
+
+
+
+            #node with only left child 
+            #node with two children 
+        end 
+
+        return root 
+
+
 
     end 
 
@@ -63,7 +103,10 @@ class Tree
 
 end 
 
-array = [6,212,23,2,3,4,5,6,7,8,9,0,9,7,5,3123,12]
+array = [6,212,23,2,3,4,5,6,7,8,9,9,7,5,3123,12]
 tree = Tree.new(array)
 tree.build_tree(array)
+# tree.pretty_print()
+tree.insert(989898)
+tree.insert(6)
 tree.pretty_print()
