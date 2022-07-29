@@ -75,22 +75,29 @@ class Tree
 
     def delete_node(root, value)
 
-        if root = nil
+        if root == nil
             return root 
-        elsif value < root.value 
+        elsif value < root.data 
             # go left
             root.left = delete_node(root.left, value)
-        elsif value > root.value
+        elsif value > root.data
             # go right 
             root.right = delete_node(root.right, value)
         else #root == value, delete
             #node with only right child or no child 
-            if node.left == nil 
-
-
-
+            if root.left == nil 
+                temp = root.right
+                temp
+            elsif root.right == nil 
+                temp = node.left
+                temp
+            else 
+                temp = min_node(node.right)
+                node.data = temp
+                delete_node(node.right, temp)
             #node with only left child 
             #node with two children 
+            end 
         end 
 
         return root 
@@ -99,7 +106,18 @@ class Tree
 
     end 
 
-  
+    def min_node(root)
+
+        min_value = root.data
+
+        until root.left == nil 
+            min_value = root.left.data
+            root = root.left
+        end 
+
+        min_value
+
+    end 
 
 end 
 
@@ -110,3 +128,6 @@ tree.build_tree(array)
 tree.insert(989898)
 tree.insert(6)
 tree.pretty_print()
+tree.delete_node(tree.root, 8)
+tree.pretty_print()
+
