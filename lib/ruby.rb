@@ -180,15 +180,13 @@ class Tree
         if root == nil
             return 
         else 
-            @inorder_array << root.value
+            @inorder_array << root.data
             preorder(root.left)
             preorder(root.right)
-            
-
-
-
-
         end 
+
+        p @inorder_array
+        @inorder_array
     end 
 
     def postorder
@@ -210,7 +208,8 @@ array = [50, 40, 60, 70, 80, 30]
 tree = Tree.new(array)
 tree.build_tree(array)
 tree.pretty_print()
-tree.level_order(tree.root)
-tree.level_order do
-      |node| puts node.data
-end 
+# tree.level_order(tree.root)
+# tree.level_order do
+#       |node| puts node.data
+# end 
+tree.preorder()
