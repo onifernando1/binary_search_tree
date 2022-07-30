@@ -155,14 +155,20 @@ class Tree
         
         if root == nil 
             p @level_order_array
-
-            return  
+            return 
         end
-            @level_order_array << root.data
-            queue.unshift(root.left) if root.left != nil 
-            queue.unshift(root.right) if root.right != nil 
 
-        level_order(queue.pop(), queue)
+        
+        @level_order_array << root.data
+        queue.unshift(root.left) if root.left != nil 
+        queue.unshift(root.right) if root.right != nil 
+        kicked = queue.pop()
+        if block_given?
+            yield(kicked)
+        end 
+        level_order(kicked, queue)
+
+       
         
     end 
 
@@ -173,3 +179,6 @@ tree = Tree.new(array)
 tree.build_tree(array)
 tree.pretty_print()
 tree.level_order(tree.root)
+tree.level_order do
+      |node| puts node.data
+end 
