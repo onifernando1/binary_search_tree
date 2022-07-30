@@ -23,6 +23,7 @@ class Tree
         @level_order_array = []
         @inorder_array = []
         @preorder_array = []
+        @postorder_array = []
 
 
     end 
@@ -200,8 +201,19 @@ class Tree
         @preorder_array
     end 
 
-    def postorder
-        
+    def postorder(root=@root)
+        #left, right, root
+
+        if root == nil 
+            return 
+        else 
+            postorder(root.left)
+            postorder(root.right)
+            @postorder_array << root.data
+        end 
+        p @postorder_array
+        @postorder_array
+
     end 
 
 
@@ -225,5 +237,6 @@ tree.pretty_print()
 #       |node| puts node.data
 # end 
 # tree.preorder()
-tree.inorder()
+# tree.inorder()
+tree.postorder()
 #add block stuff to methods
