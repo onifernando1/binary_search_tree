@@ -156,21 +156,43 @@ class Tree
         if root == nil 
             p @level_order_array
             return 
-        end
-
-        
-        @level_order_array << root.data
-        queue.unshift(root.left) if root.left != nil 
-        queue.unshift(root.right) if root.right != nil 
-        kicked = queue.pop()
-        if block_given?
-            yield(kicked)
+        else
+            @level_order_array << root.data
+            queue.unshift(root.left) if root.left != nil 
+            queue.unshift(root.right) if root.right != nil 
+            kicked = queue.pop()
+            if block_given?
+                yield(kicked)
+            end 
+            level_order(kicked, queue)
         end 
-        level_order(kicked, queue)
 
        
         
     end 
+
+    # def inorder
+    # end 
+
+    # def preorder(root=@root)
+    #     # root, left subtree, right subtree
+    #     if root == nil
+    #         return 
+    #     end
+    # end 
+
+    # def postorder
+    # end 
+
+
+
+
+
+
+
+
+
+
 
 end 
 
