@@ -86,17 +86,19 @@ class Tree
         else #root == value, delete
             #node with only right child or no child 
             if root.left == nil 
-                temp = root.right
-                temp
-            elsif root.right == nil 
-                temp = node.left
-                temp
-            else 
-                temp = min_node(node.right)
-                node.data = temp
-                delete_node(node.right, temp)
+                # temp = root.right
+                # temp
+                return root.right 
             #node with only left child 
+            elsif root.right == nil 
+                # temp = root.left
+                # temp
+                return root.left
+            else 
             #node with two children 
+                temp = min_node(root.right)
+                root.data = temp
+                delete_node(root.right, temp)
             end 
         end 
 
@@ -121,13 +123,13 @@ class Tree
 
 end 
 
-array = [6,212,23,2,3,4,5,6,7,8,9,9,7,5,3123,12]
+array = [1, 2, 3, 4, 5, 6, 7, 9, 8]
 tree = Tree.new(array)
 tree.build_tree(array)
 # tree.pretty_print()
 tree.insert(989898)
 tree.insert(6)
 tree.pretty_print()
-tree.delete_node(tree.root, 8)
+tree.delete_node(tree.root, 5)
 tree.pretty_print()
 
