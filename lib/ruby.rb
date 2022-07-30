@@ -73,6 +73,11 @@ class Tree
 
     end 
 
+    def delete(value)
+        delete_node(@root, value)
+        
+    end 
+
     def delete_node(root, value)
 
         if root == nil
@@ -86,13 +91,9 @@ class Tree
         else #root == value, delete
             #node with only right child or no child 
             if root.left == nil 
-                # temp = root.right
-                # temp
                 return root.right 
             #node with only left child 
             elsif root.right == nil 
-                # temp = root.left
-                # temp
                 return root.left
             else 
             #node with two children 
@@ -121,15 +122,33 @@ class Tree
 
     end 
 
+
+    def find(root, value) 
+        
+        @found_node = nil
+
+        if root == nil 
+            return root 
+        elsif value < root.data 
+            root.left = find(root.left, value)
+        elsif value > root.data 
+            root.right = find(root.right, value)
+        else #root.value == value 
+            @found_node = root
+            puts "Found Node #{@found_node}"
+            root
+        end 
+
+    end 
+
 end 
 
-array = [1, 2, 3, 4, 5, 6, 7, 9, 8]
+array = [50, 40, 60, 70, 80, 30]
 tree = Tree.new(array)
 tree.build_tree(array)
 # tree.pretty_print()
-tree.insert(989898)
-tree.insert(6)
 tree.pretty_print()
-tree.delete_node(tree.root, 5)
+tree.delete(40)
+tree.delete(30)
 tree.pretty_print()
-
+tree.find(tree.root, 50)
