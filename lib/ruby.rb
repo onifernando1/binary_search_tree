@@ -21,6 +21,7 @@ class Tree
         @sorted_array = array.uniq.sort()
         @root = build_tree(@sorted_array)
         @level_order_array = []
+        @inorder_array = []
 
 
     end 
@@ -171,18 +172,27 @@ class Tree
         
     end 
 
-    # def inorder
-    # end 
+    def inorder
+    end 
 
-    # def preorder(root=@root)
-    #     # root, left subtree, right subtree
-    #     if root == nil
-    #         return 
-    #     end
-    # end 
+    def preorder(root=@root)
+        # root, left subtree, right subtree
+        if root == nil
+            return 
+        else 
+            @inorder_array << root.value
+            preorder(root.left)
+            preorder(root.right)
+            
 
-    # def postorder
-    # end 
+
+
+
+        end 
+    end 
+
+    def postorder
+    end 
 
 
 
