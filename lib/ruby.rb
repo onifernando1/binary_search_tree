@@ -20,6 +20,8 @@ class Tree
     def initialize(array)
         @sorted_array = array.uniq.sort()
         @root = build_tree(@sorted_array)
+        @level_order_array = []
+
 
     end 
 
@@ -123,7 +125,7 @@ class Tree
     end 
 
 
-    def find(root, value) 
+    def find(root=@root, value) 
         
         @found_node = nil
 
@@ -136,9 +138,32 @@ class Tree
         else #root.value == value 
             @found_node = root
             puts "Found Node #{@found_node}"
+            puts "Found Node value: #{@found_node.data}"
             root
         end 
 
+    end 
+
+    def my_block 
+        yield 
+    end 
+
+    def level_order(root=@root, queue=[])
+        #unshift = add item to beginning of array (to end of queue)
+        #pop = removes last element (from front of queue)
+
+        
+        if root == nil 
+            p @level_order_array
+
+            return  
+        end
+            @level_order_array << root.data
+            queue.unshift(root.left) if root.left != nil 
+            queue.unshift(root.right) if root.right != nil 
+
+        level_order(queue.pop(), queue)
+        
     end 
 
 end 
@@ -146,9 +171,5 @@ end
 array = [50, 40, 60, 70, 80, 30]
 tree = Tree.new(array)
 tree.build_tree(array)
-# tree.pretty_print()
 tree.pretty_print()
-tree.delete(40)
-tree.delete(30)
-tree.pretty_print()
-tree.find(tree.root, 50)
+tree.level_order(tree.root)
