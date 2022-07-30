@@ -22,6 +22,7 @@ class Tree
         @root = build_tree(@sorted_array)
         @level_order_array = []
         @inorder_array = []
+        @preorder_array = []
 
 
     end 
@@ -145,9 +146,6 @@ class Tree
 
     end 
 
-    def my_block 
-        yield 
-    end 
 
     def level_order(root=@root, queue=[])
         #unshift = add item to beginning of array (to end of queue)
@@ -172,7 +170,19 @@ class Tree
         
     end 
 
-    def inorder
+    def inorder(root=@root)
+        #left root right 
+        if root == nil 
+            return 
+        else 
+            inorder(root.left)
+            @inorder_array << root.data
+            inorder(root.right)
+        end 
+
+        p @inorder_array
+        @inorder_array
+            
     end 
 
     def preorder(root=@root)
@@ -180,16 +190,18 @@ class Tree
         if root == nil
             return 
         else 
-            @inorder_array << root.data
+            @preorder_array << root.data
             preorder(root.left)
             preorder(root.right)
         end 
+    
+        p @preorder_array
 
-        p @inorder_array
-        @inorder_array
+        @preorder_array
     end 
 
     def postorder
+        
     end 
 
 
@@ -212,4 +224,6 @@ tree.pretty_print()
 # tree.level_order do
 #       |node| puts node.data
 # end 
-tree.preorder()
+# tree.preorder()
+tree.inorder()
+#add block stuff to methods
