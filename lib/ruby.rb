@@ -245,22 +245,53 @@ class Tree
 
     end 
 
-    def depth(root=@root, node)
+
+    def depth(node)
+
+        depth_root(@root, node)
+    end 
+
+    def depth_root(root=@root, node) #check if it really works accidentally stumbled onto the solution
 
         if root == node || root == nil
             return 0
         else 
-            right_depth = depth(root.right, node)  
-            left_depth = depth(root.left, node)
+            right_depth = depth_root(root.right, node)  
+            left_depth = depth_root(root.left, node)
         end 
 
         [left_depth, right_depth].min + 1 
 
     end 
 
+    def balanced?(root=@root)
 
+        if root == nil 
+            return 
+        else 
+            right = height(root.right)
+            left = height(root.left)
+        end 
 
+        difference = (right - left)
+        difference * -1 if difference < 0
 
+        if difference > 1
+            return false 
+        else  
+            return true 
+        end 
+
+    end 
+
+    def unbalanced?
+        if self.balanced? == false 
+            true 
+        else 
+            false 
+        end 
+
+    end 
 
 
 
@@ -269,7 +300,12 @@ end
 array = [50, 40, 60, 70, 80, 30]
 tree = Tree.new(array)
 tree.build_tree(array)
+tree.insert(1000)
+tree.insert(10000)
+tree.insert(500)
+tree.insert(1000000)
 tree.pretty_print()
+
 # tree.level_order(tree.root)
 # # tree.level_order do
 # #       |node| puts node.data
@@ -279,4 +315,6 @@ tree.pretty_print()
 # tree.postorder()
 # p tree.root.data
 p tree.root.right.right.data
-p tree.depth(tree.root, tree.root)
+p tree.depth_root(tree.root)
+p tree.balanced?
+p tree.unbalanced?
