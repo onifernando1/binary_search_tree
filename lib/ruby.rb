@@ -201,7 +201,7 @@ class Tree
             @preorder_array << root.data
             preorder(root.left)
             preorder(root.right)
-            if block_given? == false 
+            if block_given? 
                 yield(root.data)
             end 
         end 
@@ -318,27 +318,29 @@ class Tree
 
 end 
 
-array = [50, 40, 60, 70, 80, 30]
-tree = Tree.new(array)
-tree.build_tree(array)
-tree.insert(1000)
-tree.insert(10000)
-tree.insert(500)
-tree.insert(1000000)
-tree.pretty_print()
+#Driver script 
 
-# tree.level_order(tree.root)
-# # tree.level_order do
-# #       |node| puts node.data
-# # end 
-# tree.preorder()
-# tree.inorder()
-# tree.postorder()
-# p tree.root.data
-# p tree.root.right.right.data
-# p tree.depth_root(tree.root)
-# p tree.balanced?
-# new_tree = tree.rebalance()
-# new_tree.pretty_print()
+rand_array = (Array.new(15) { rand(1..100) })
+tree = Tree.new(rand_array)
+tree.build_tree(rand_array)
+tree.pretty_print()
+p tree.balanced?
+tree.inorder
+tree.postorder
+tree.preorder
+tree.insert(100)
+tree.insert(10000)
+tree.insert(140)
+tree.insert(180)
+tree.insert(1220)
+p tree.balanced?
 new_tree = tree.rebalance()
-new_tree.pretty_print()
+new_tree.inorder
+new_tree.postorder
+new_tree.preorder
+
+
+# fix so you only print one array 
+
+
+
