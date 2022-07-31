@@ -16,7 +16,7 @@ end
 
 class Tree
 
-    attr_accessor :sorted_array, :root, :left_children, :right_children
+    attr_accessor :sorted_array, :root, :left_children, :right_children, :rebalance_array
     
     def initialize(array)
         @sorted_array = array.uniq.sort()
@@ -28,6 +28,7 @@ class Tree
         @left_height = 0
         @right_height = 0
         @max_height = 0
+        @rebalance_array = []
 
     end 
 
@@ -181,10 +182,10 @@ class Tree
         else 
             inorder(root.left)
             @inorder_array << root.data
+            inorder(root.right)
             if block_given?
                 yield(root.data)
             end 
-            inorder(root.right)
         end 
 
         p @inorder_array
@@ -198,11 +199,11 @@ class Tree
             return 
         else 
             @preorder_array << root.data
-            if block_given?
-                yield(root.data)
-            end 
             preorder(root.left)
             preorder(root.right)
+            if block_given? == false 
+                yield(root.data)
+            end 
         end 
     
         p @preorder_array
@@ -225,6 +226,7 @@ class Tree
         end 
         p @postorder_array
         @postorder_array
+        
 
     end 
 
@@ -293,6 +295,25 @@ class Tree
 
     end 
 
+    def array_from_tree 
+        @rebalance_array = []
+        array = self.inorder()
+        array.each do |item|
+            @rebalance_array << item
+        end 
+
+        p "FINAL #{@rebalance_array}" 
+        @rebalance_array
+
+    end 
+
+    def rebalance
+        self.array_from_tree()
+        new_tree = Tree.new(@rebalance_array)
+        new_tree.pretty_print() 
+        new_tree      
+    end 
+
 
 
 end 
@@ -314,7 +335,10 @@ tree.pretty_print()
 # tree.inorder()
 # tree.postorder()
 # p tree.root.data
-p tree.root.right.right.data
-p tree.depth_root(tree.root)
-p tree.balanced?
-p tree.unbalanced?
+# p tree.root.right.right.data
+# p tree.depth_root(tree.root)
+# p tree.balanced?
+# new_tree = tree.rebalance()
+# new_tree.pretty_print()
+new_tree = tree.rebalance()
+new_tree.pretty_print()
