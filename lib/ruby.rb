@@ -16,7 +16,7 @@ end
 
 class Tree
 
-    attr_accessor :sorted_array, :root, :left_children, :right_children, :rebalance_array
+    attr_accessor :sorted_array, :root, :left_children, :right_children, :rebalance_array, :postorder_array, :preorder_array, :inorder_array
     
     def initialize(array)
         @sorted_array = array.uniq.sort()
@@ -188,7 +188,7 @@ class Tree
             end 
         end 
 
-        p @inorder_array
+        # p @inorder_array
         @inorder_array
             
     end 
@@ -206,7 +206,7 @@ class Tree
             end 
         end 
     
-        p @preorder_array
+        # p @preorder_array
 
         @preorder_array
     end 
@@ -224,7 +224,7 @@ class Tree
                 yield(root.data)
             end 
         end 
-        p @postorder_array
+        # p @postorder_array
         @postorder_array
         
 
@@ -302,7 +302,7 @@ class Tree
             @rebalance_array << item
         end 
 
-        p "FINAL #{@rebalance_array}" 
+        # p "FINAL #{@rebalance_array}" 
         @rebalance_array
 
     end 
@@ -325,19 +325,20 @@ tree = Tree.new(rand_array)
 tree.build_tree(rand_array)
 tree.pretty_print()
 p tree.balanced?
-tree.inorder
-tree.postorder
+    # p tree.inorder()
+p tree.postorder()
 tree.preorder
 tree.insert(100)
 tree.insert(10000)
 tree.insert(140)
 tree.insert(180)
 tree.insert(1220)
-p tree.balanced?
-new_tree = tree.rebalance()
-new_tree.inorder
-new_tree.postorder
-new_tree.preorder
+
+# p tree.balanced?
+# new_tree = tree.rebalance()
+# new_tree.inorder
+# new_tree.postorder_array
+# new_tree.preorder
 
 
 # fix so you only print one array 
