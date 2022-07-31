@@ -7,6 +7,7 @@ class Node
         @data = data
         @left = nil
         @right = nil
+       
     end 
 
 
@@ -24,7 +25,9 @@ class Tree
         @inorder_array = []
         @preorder_array = []
         @postorder_array = []
-
+        @left_height = 0
+        @right_height = 0
+        @max_height = 0
 
     end 
 
@@ -227,7 +230,20 @@ class Tree
 
 
 
+    def height(root)
 
+      
+        if root == nil
+            return 0
+        else 
+            right_height = height(root.right)
+            left_height = height(root.left)
+            
+        end
+
+        [left_height, right_height].max + 1 
+
+    end 
 
 
 
@@ -242,10 +258,11 @@ tree = Tree.new(array)
 tree.build_tree(array)
 tree.pretty_print()
 # tree.level_order(tree.root)
-# tree.level_order do
-#       |node| puts node.data
-# end 
-tree.preorder()
-tree.inorder()
-tree.postorder()
-#add block stuff to methods
+# # tree.level_order do
+# #       |node| puts node.data
+# # end 
+# tree.preorder()
+# tree.inorder()
+# tree.postorder()
+p tree.root.data
+p tree.height(tree.root.left)
