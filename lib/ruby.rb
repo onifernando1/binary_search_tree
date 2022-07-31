@@ -178,6 +178,9 @@ class Tree
         else 
             inorder(root.left)
             @inorder_array << root.data
+            if block_given?
+                yield(root.data)
+            end 
             inorder(root.right)
         end 
 
@@ -192,6 +195,9 @@ class Tree
             return 
         else 
             @preorder_array << root.data
+            if block_given?
+                yield(root.data)
+            end 
             preorder(root.left)
             preorder(root.right)
         end 
@@ -210,6 +216,9 @@ class Tree
             postorder(root.left)
             postorder(root.right)
             @postorder_array << root.data
+            if block_given?
+                yield(root.data)
+            end 
         end 
         p @postorder_array
         @postorder_array
@@ -236,7 +245,7 @@ tree.pretty_print()
 # tree.level_order do
 #       |node| puts node.data
 # end 
-# tree.preorder()
-# tree.inorder()
+tree.preorder()
+tree.inorder()
 tree.postorder()
 #add block stuff to methods
