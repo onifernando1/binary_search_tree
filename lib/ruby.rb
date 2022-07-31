@@ -245,6 +245,19 @@ class Tree
 
     end 
 
+    def depth(root=@root, node)
+
+        if root == node || root == nil
+            return 0
+        else 
+            right_depth = depth(root.right, node)  
+            left_depth = depth(root.left, node)
+        end 
+
+        [left_depth, right_depth].min + 1 
+
+    end 
+
 
 
 
@@ -264,5 +277,6 @@ tree.pretty_print()
 # tree.preorder()
 # tree.inorder()
 # tree.postorder()
-p tree.root.data
-p tree.height(tree.root.left)
+# p tree.root.data
+p tree.root.right.right.data
+p tree.depth(tree.root, tree.root)
